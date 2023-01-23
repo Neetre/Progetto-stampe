@@ -35,7 +35,7 @@ def tabella():
 
 
 
-fhtml = open("stampa3.html","w")
+fhtml = open("stampa2.html","w")
 fhtml.write('''<!DOCTYPE html5>
 <html>
 	<style>

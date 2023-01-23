@@ -24,13 +24,9 @@ def tabella():
 			doc += 1
 			fhtml.write(f"            <td>{giorno},{ora},{materia} <br> {classe} <br> {aula}</td>")
 		fhtml.write("        </tr>")
-			#c = input("terminare? ")
-			#if c == "y":
-			#    break
 
 
-
-fhtml = open("stampa2.html","w")
+fhtml = open("stampa.html","w")
 fhtml.write('''<!DOCTYPE html5>
 <html>
 	<style>
