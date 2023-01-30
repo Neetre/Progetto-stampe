@@ -3,6 +3,7 @@
 '''
 import csv
 
+value_table = ["" for i in range (41)]
         
 def tabella():
 	with open('odi_stampeA3Docenti.csv', newline='') as csvfile:
@@ -10,7 +11,7 @@ def tabella():
 		fhtml.write("        <tr>")
 		doc = 0
 		for row in reader:
-			print(row["docenti"])
+			#print(row["docenti"])
 			docente = row['docenti']
 			if docente != "ADAMOLI PAOLO":
 				continue
@@ -19,11 +20,25 @@ def tabella():
 			classe = row['classe']
 			aula = row['aula']
 			materia = row['materia']
-			if doc == 0:
-				fhtml.write(f"            <td colspan='8 align='center'>{docente}</td>")
-			doc += 1
-			fhtml.write(f"            <td>{materia} <br> {classe} <br> {aula}</td>")
+			li(docente,  giorno, ora, classe, aula, materia)
+		for i in range(0, len(value_table)):
+			if i == 0:
+				fhtml.write(f"            <td colspan='8 align='center'>{value_table[i]}</td>")
+			else:
+				fhtml.write(f"            <td align='center'>{value_table[i]}</td>")
 		fhtml.write("        </tr>")
+			
+   
+   
+def li(docente, giorno, ora, classe, aula, materia):
+    global value_table
+    giorni = {"lunedi": 1, "martedi": 2, "mercoledi" : 3, "giovedi" : 4, "venerdi" : 5}
+    n_giorno = giorni[giorno]
+    value_table[0] = docente
+    offset = ((n_giorno - 1) * 8)
+    indice = offset + int(ora)
+    value_table[indice] = classe
+    #print(value_table)
 
 
 fhtml = open("stampa.html","w")
@@ -95,3 +110,5 @@ fhtml.write("    </table>")
 fhtml.write("</body>")
 fhtml.write("</html>")
 fhtml.close()
+
+print(value_table)
