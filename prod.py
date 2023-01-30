@@ -37,11 +37,11 @@ def li(docente, giorno, ora, classe, aula, materia):
     value_table[0] = docente
     offset = ((n_giorno - 1) * 8)
     indice = offset + int(ora)
-    value_table[indice] = classe
+    value_table[indice] = f"{classe}, {aula}, {materia}"
     #print(value_table)
 
 
-fhtml = open("stampa.html","a")
+fhtml = open("stampa.html","w")
 fhtml.write('''<!DOCTYPE html5>
 <html>
 	<style>
