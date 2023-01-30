@@ -22,7 +22,7 @@ def tabella():
 			if doc == 0:
 				fhtml.write(f"            <td colspan='8 align='center'>{docente}</td>")
 			doc += 1
-			fhtml.write(f"            <td>{giorno},{ora},{materia} <br> {classe} <br> {aula}</td>")
+			fhtml.write(f"            <td>{materia} <br> {classe} <br> {aula}</td>")
 		fhtml.write("        </tr>")
 
 
@@ -36,11 +36,11 @@ fhtml.write('''<!DOCTYPE html5>
 		<table border='1' width='400px' style="width:100%">
 			<tr>
 				<th colspan='8' align="center">Docente</th>
-				<th colspan='8' align="center">Lunedì</th>
-				<th colspan='8' align="center">Martedì</th>
-				<th colspan='8' align="center">Mercoldì</th>
-				<th colspan='8' align="center">Giovedì</th>
-				<th colspan='8' align="center">Venerdì</th>
+				<th colspan='8' align="center">Luned&igrave;</th>
+				<th colspan='8' align="center">Marted&igrave;</th>
+				<th colspan='8' align="center">Mercold&igrave;</th>
+				<th colspan='8' align="center">Gioved&igrave;</th>
+				<th colspan='8' align="center">Venerd&igrave;</th>
 			</tr>
 			<tr>
 				<th colspan="8" align='center'></th>
