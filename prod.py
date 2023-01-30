@@ -13,8 +13,8 @@ def tabella():
 		for row in reader:
 			#print(row["docenti"])
 			docente = row['docenti']
-			if docente != "ADAMOLI PAOLO":
-				continue
+			#if docente != "ADAMOLI PAOLO":
+				#continue
 			giorno = row['giorno']
 			ora = row['ora']
 			classe = row['classe']
@@ -41,7 +41,7 @@ def li(docente, giorno, ora, classe, aula, materia):
     #print(value_table)
 
 
-fhtml = open("stampa.html","w")
+fhtml = open("stampa.html","a")
 fhtml.write('''<!DOCTYPE html5>
 <html>
 	<style>
