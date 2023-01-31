@@ -1,34 +1,40 @@
 '''
-
+Braga Mattia 3FI
+a.s. 2022/2023
 '''
 import csv
 
 value_table = ["" for i in range (41)]
         
 def tabella():
+	global value_table
 	with open('odi_stampeA3Docenti.csv', newline='') as csvfile:
 		reader = csv.DictReader(csvfile, delimiter = ";")
 		fhtml.write("        <tr>")
-		doc = 0
 		for row in reader:
-			#print(row["docenti"])
 			docente = row['docenti']
-			#if docente != "ADAMOLI PAOLO":
-				#continue
+			if docente != "ADAMOLI PAOLO":
+				continue
 			giorno = row['giorno']
 			ora = row['ora']
 			classe = row['classe']
 			aula = row['aula']
 			materia = row['materia']
+			if value_table[0] != docente:
+				value_table = ["" for i in range (41)]
 			li(docente,  giorno, ora, classe, aula, materia)
-		for i in range(0, len(value_table)):
+		doc()
+		fhtml.write("        </tr>")
+
+
+def doc():
+	global value_table
+	for i in range(0, len(value_table)):
 			if i == 0:
 				fhtml.write(f"            <td colspan='8 align='center'>{value_table[i]}</td>")
 			else:
 				fhtml.write(f"            <td align='center'>{value_table[i]}</td>")
-		fhtml.write("        </tr>")
-			
-   
+
    
 def li(docente, giorno, ora, classe, aula, materia):
     global value_table
@@ -37,7 +43,7 @@ def li(docente, giorno, ora, classe, aula, materia):
     value_table[0] = docente
     offset = ((n_giorno - 1) * 8)
     indice = offset + int(ora)
-    value_table[indice] = f"{classe}, {aula}, {materia}"
+    value_table[indice] = f"{classe} <br> {aula} <br> {materia}"
     #print(value_table)
 
 
