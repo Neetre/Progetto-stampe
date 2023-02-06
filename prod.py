@@ -13,18 +13,22 @@ def tabella(fhtml):
 		reader = csv.DictReader(csvfile, delimiter = ";")
 		fhtml.write("        <tr>")
 		attivo = False
+		i = 0 
 		for row in reader:
 			docente = row['docenti']
 			#if docente != "BELLINI GIANNI":
 				#continue
+
 			if attivo == False:
 				docente_attivo = docente
 				attivo = True
+
 			if docente != docente_attivo:
 				#print(value_table)
 				doc()
 				fhtml.write("        </tr>")
 				docente_attivo = docente
+				i += 1
 			
 			giorno = row['giorno']
 			ora = row['ora']
@@ -35,7 +39,11 @@ def tabella(fhtml):
 			if value_table[0] != docente:
 				value_table = ["" for i in range (41)]
 			li(docente,  giorno, ora, classe, aula, materia)
-
+			if i == 10:
+				i = 0
+				header(fhtml)
+		doc()
+		fhtml.write("        </tr>")
 
 def doc():
 	global value_table
@@ -57,12 +65,16 @@ def li(docente, giorno, ora, classe, aula, materia):
     #print(value_table)
 
 
-def header(fhtml):
+def head(fhtml):
 	fhtml.write('''<!DOCTYPE html5>
 	<html>
 		<style>
 			table, tr, td {border:1px solid black;}
-		</style>
+		</style>''')
+
+
+def header(fhtml):
+    fhtml.write('''
 		<body>
 			<table border='1' width='400px' style="width:100%">
 				<tr>
@@ -122,14 +134,17 @@ def header(fhtml):
 					<th align='center'>8</th>
 				</tr>''')
  
+
 def footer(fhtml):
 	fhtml.write("    </table>")
 	fhtml.write("</body>")
 	fhtml.write("</html>")
 	fhtml.close()
 
+
 if __name__ == "__main__":
     fhtml = open("stampa.html","w")
+    head(fhtml)
     header(fhtml)
     tabella(fhtml)
     footer(fhtml)
