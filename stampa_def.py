@@ -3,6 +3,10 @@ Braga Mattia 3FI
 a.s. 2022/2023
 '''
 import csv
+from icecream import ic
+
+ic.disable()
+
 
 value_table = ["" for i in range (41)]
         
@@ -25,7 +29,7 @@ def tabella(fhtml):
 				attivo = True
 
 			if docente != docente_attivo:
-				#print(value_table)
+				ic(value_table)
 				doc()
 				fhtml.write("        </tr>")
 				docente_attivo = docente
@@ -46,6 +50,7 @@ def tabella(fhtml):
 		doc()
 		fhtml.write("        </tr>")
 
+
 def doc():
 	global value_table
 	for i in range(0, len(value_table)):
@@ -62,8 +67,8 @@ def li(docente, giorno, ora, classe, aula, materia):
     value_table[0] = docente
     offset = ((n_giorno - 1) * 8)
     indice = offset + int(ora)
-    value_table[indice] = f"{classe} <br> {aula} <br> {materia}"
-    #print(value_table)
+    value_table[indice] = f"{classe}<br>{aula}<br>{materia}"
+    ic(value_table)
 
 
 def head(fhtml):
@@ -149,5 +154,4 @@ if __name__ == "__main__":
     header(fhtml)
     tabella(fhtml)
     footer(fhtml)
-
-print(value_table)
+    ic(value_table)
