@@ -20,6 +20,11 @@ def tabella(fhtml):
 			if attivo == False:
 				docente_attivo = docente
 				attivo = True
+			if docente != docente_attivo:
+				#print(value_table)
+				doc()
+				fhtml.write("        </tr>")
+				docente_attivo = docente
 			
 			giorno = row['giorno']
 			ora = row['ora']
@@ -30,12 +35,6 @@ def tabella(fhtml):
 			if value_table[0] != docente:
 				value_table = ["" for i in range (41)]
 			li(docente,  giorno, ora, classe, aula, materia)
-
-			if docente != docente_attivo:
-				#print(value_table)
-				doc()
-				fhtml.write("        </tr>")
-				docente_attivo = docente
 
 
 def doc():
