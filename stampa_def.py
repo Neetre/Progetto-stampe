@@ -16,6 +16,7 @@ def tabella(fhtml):
 		i = 0 
 		for row in reader:
 			docente = row['docenti']
+
 			#if docente != "BELLINI GIANNI":
 				#continue
 
