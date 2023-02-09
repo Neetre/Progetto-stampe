@@ -82,7 +82,7 @@ def head(fhtml):
 def header(fhtml):
     fhtml.write('''
 		<body>
-			<table border='1' width='400px' style="width:100%">
+			<table border='1'; width='100%'; height:auto; style="width:100%; table-layout:auto;   ">
 				<tr>
 					<th colspan='8' align="center">Docente</th>
 					<th colspan='8' align="center">Luned&igrave;</th>
