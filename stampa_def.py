@@ -4,6 +4,7 @@ a.s. 2022/2023
 '''
 import csv
 from icecream import ic
+import pdfkit
 
 ic.disable()
 
@@ -155,3 +156,5 @@ if __name__ == "__main__":
     tabella(fhtml)
     footer(fhtml)
     ic(value_table)
+    with open('C:/Users/19746/Documents/GitHub/Progetto-stampe/test.html') as f:
+    	pdfkit.from_file(f, 'stampa.pdf')
