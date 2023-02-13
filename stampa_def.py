@@ -14,7 +14,7 @@ value_table = ["" for i in range (41)]
 def tabella(fhtml):
 	global value_table
 
-	with open('odi_stampeA3Docenti.csv', newline='') as csvfile:
+	with open('odi_stampeA3Docenti2.csv', newline='') as csvfile:
 		reader = csv.DictReader(csvfile, delimiter = ";")
 		fhtml.write("        <tr>")
 		attivo = False
@@ -45,8 +45,9 @@ def tabella(fhtml):
 			if value_table[0] != docente:
 				value_table = ["" for i in range (41)]
 			li(docente,  giorno, ora, classe, aula, materia)
-			if i == 10:
+			if i == 18:
 				i = 0
+				fhtml.write("<br>")
 				header(fhtml)
 		doc()
 		fhtml.write("        </tr>")
@@ -56,7 +57,7 @@ def doc():
 	global value_table
 	for i in range(0, len(value_table)):
 			if i == 0:
-				fhtml.write(f"            <td colspan='8 align='center'>{value_table[i]}</td>")
+				fhtml.write(f"            <td colspan='8 align='center' >{value_table[i]}</td>")
 			else:
 				fhtml.write(f"            <td align='center'>{value_table[i]}</td>")
 
@@ -79,11 +80,11 @@ def head(fhtml):
 			table, tr, td {border:1px solid black;}
 		</style>''')
 
-
+#table-layout:auto;  
 def header(fhtml):
     fhtml.write('''
 		<body>
-			<table border='1'; width='100%'; height:auto; style="width:100%; table-layout:auto;   ">
+			<table border='1'; style="width:100%; height:auto;">   
 				<tr>
 					<th colspan='8' align="center">Docente</th>
 					<th colspan='8' align="center">Luned&igrave;</th>
@@ -149,6 +150,20 @@ def footer(fhtml):
 	fhtml.close()
 
 
+def pdf():
+    options = {
+    'page-size': 'A3',
+	'orientation': 'Landscape',
+    'margin-top': '0.50in',
+    'margin-right': '0.50in',
+    'margin-bottom': '0.60in',
+    'margin-left': '0.50in',
+}
+    #Portrait
+
+    with open('stampa.html') as f:
+    	pdfkit.from_file(f, 'stampa.pdf', options = options)
+
 if __name__ == "__main__":
     fhtml = open("stampa.html","w")
     head(fhtml)
@@ -156,5 +171,4 @@ if __name__ == "__main__":
     tabella(fhtml)
     footer(fhtml)
     ic(value_table)
-    with open('C:/Users/19746/Documents/GitHub/Progetto-stampe/test.html') as f:
-    	pdfkit.from_file(f, 'stampa.pdf')
+    pdf()

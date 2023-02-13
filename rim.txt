@@ -1,0 +1,2 @@
+sostogno = sost
+palestra = pale
