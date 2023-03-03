@@ -53,6 +53,10 @@ def tabella(fhtml):
 		fhtml.write("        </tr>")
 
 
+def changer():
+    
+
+
 def doc():
 	global value_table
 	for i in range(0, len(value_table)):
@@ -163,6 +167,23 @@ def pdf():
 
     with open('stampa.html') as f:
     	pdfkit.from_file(f, 'stampa.pdf', options = options)
+
+
+def changer():
+    with open('odi_stampeA3Docenti2.csv', newline='') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter = ";")
+        f_in = open("odi_stampeA3Docenti3.csv","r")
+        for row in reader:
+            aula = row['aula']
+            materia = row['materia']
+            
+            if aula == "PALESTRA":
+                row['aula'] = "PALE"
+                
+            if aula == "SOSTEGNO":
+                row['materia'] = "SOST"
+            else:
+                f_in.write(row)
 
 if __name__ == "__main__":
     fhtml = open("stampa.html","w")
