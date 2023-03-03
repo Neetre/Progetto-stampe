@@ -6,10 +6,31 @@ import csv
 from icecream import ic
 import pdfkit
 from changer import changer
-
+from time import time, localtime, strftime
+import platform
+import os.path
 
 #ic.enable()
 ic.disable()
+
+
+def log(term):
+    '''
+    Funzione che aggiorna il file trace quando il programma
+    viene eseguito e terminato.
+    '''
+    flog = open("./log/trace.log", "a")
+    uname = platform.uname()
+    name_tuple = localtime()
+    time_string = strftime("%H:%M:%S del giorno %d/%m/%Y", name_tuple)
+    nome_f = os.path.basename(__file__)
+    line = "----------------------------------------------"
+
+    if term == False:
+        flog.write(f"{str(time())}, {uname.node}, {uname.system}, {nome_f}, Programma iniziato alle ore {time_string} \n")
+    else:
+        flog.write(f"{str(time())}, {uname.node}, {uname.system}, {nome_f}, Programma terminato alle ore {time_string} \n {line} \n")
+    flog.close()
 
 
 value_table = ["" for i in range (41)]
@@ -35,7 +56,8 @@ def tabella(fhtml):
 
 			if docente != docente_attivo:
 				ic(value_table)
-				doc()
+				doc(fhtml)
+				doc(fhtml)
 				fhtml.write("        </tr>")
 				docente_attivo = docente
 				i += 1
@@ -53,11 +75,11 @@ def tabella(fhtml):
 				i = 0
 				fhtml.write("<br>")
 				header(fhtml)
-		doc()
+		doc(fhtml)
 		fhtml.write("        </tr>")
 
 
-def doc():
+def doc(fhtml):
 	global value_table
 	for i in range(0, len(value_table)):
 			if i == 0:
@@ -163,17 +185,21 @@ def pdf():
     'margin-bottom': '0.60in',
     'margin-left': '0.50in',
 }
-    #Portrait
-
     with open('stampa.html') as f:
     	pdfkit.from_file(f, 'stampa.pdf', options = options)
 
-if __name__ == "__main__":
+
+def main():
     fhtml = open("stampa.html","w")
     changer()
     head(fhtml)
     header(fhtml)
     tabella(fhtml)
     footer(fhtml)
-    ic(value_table)
+    #ic(value_table)
     pdf()
+
+if __name__ == "__main__":
+    log(term = False)
+    main()
+    log(term = True)
