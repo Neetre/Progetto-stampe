@@ -6,11 +6,13 @@ import csv
 from icecream import ic
 import pdfkit
 
+
 ic.disable()
 
 
 value_table = ["" for i in range (41)]
-        
+
+
 def tabella(fhtml):
 	global value_table
 
@@ -53,10 +55,6 @@ def tabella(fhtml):
 		fhtml.write("        </tr>")
 
 
-def changer():
-    
-
-
 def doc():
 	global value_table
 	for i in range(0, len(value_table)):
@@ -84,7 +82,7 @@ def head(fhtml):
 			table, tr, td {border:1px solid black;}
 		</style>''')
 
-#table-layout:auto;  
+ 
 def header(fhtml):
     fhtml.write('''
 		<body>
@@ -170,23 +168,20 @@ def pdf():
 
 
 def changer():
-    with open('odi_stampeA3Docenti2.csv', newline='') as csvfile:
-        reader = csv.DictReader(csvfile, delimiter = ";")
-        f_in = open("odi_stampeA3Docenti3.csv","r")
-        for row in reader:
-            aula = row['aula']
-            materia = row['materia']
-            
-            if aula == "PALESTRA":
-                row['aula'] = "PALE"
-                
-            if aula == "SOSTEGNO":
-                row['materia'] = "SOST"
-            else:
-                f_in.write(row)
+    with open('odi_stampeA3Docenti.csv') as file:
+        fil = open("odi_stampeA3Docenti2.csv", "w")
+        rfile = file.read()
+        for par in rfile:
+            if par == "PALESTRA":
+                rfile.replace("PALESTRA", "PALE")
+            elif par == "SOSTEGNO":
+                rfile.replace("SOSTEGNO", "SOST")
+        fil.write(rfile)
+
 
 if __name__ == "__main__":
     fhtml = open("stampa.html","w")
+    changer()
     head(fhtml)
     header(fhtml)
     tabella(fhtml)
