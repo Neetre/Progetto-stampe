@@ -174,4 +174,4 @@ if __name__ == "__main__":
     tabella(fhtml)
     footer(fhtml)
     ic(value_table)
-    pdf()
+    pdf() 		

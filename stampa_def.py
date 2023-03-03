@@ -5,8 +5,10 @@ a.s. 2022/2023
 import csv
 from icecream import ic
 import pdfkit
+from changer import changer
 
 
+#ic.enable()
 ic.disable()
 
 
@@ -165,19 +167,6 @@ def pdf():
 
     with open('stampa.html') as f:
     	pdfkit.from_file(f, 'stampa.pdf', options = options)
-
-
-def changer():
-    with open('odi_stampeA3Docenti.csv') as file:
-        fil = open("odi_stampeA3Docenti2.csv", "w")
-        rfile = file.read()
-        for par in rfile:
-            if par == "PALESTRA":
-                rfile.replace("PALESTRA", "PALE")
-            elif par == "SOSTEGNO":
-                rfile.replace("SOSTEGNO", "SOST")
-        fil.write(rfile)
-
 
 if __name__ == "__main__":
     fhtml = open("stampa.html","w")

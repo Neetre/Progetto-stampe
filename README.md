@@ -1,5 +1,6 @@
 # Progetto-stampe
-Progetto stampe x segreteria scuola. 
+
+Progetto stampe x segreteria scuola.
 
 ![Language](https://img.shields.io/badge/Spellcheck-Pass-green?style=flat)
 ![Platform](https://img.shields.io/badge/OS%20platform%20supported-Windows-blue?style=flat)
@@ -9,20 +10,20 @@ Progetto stampe x segreteria scuola.
 
 ## Descrizione
 
-Inserire in questo paragrafo la descrizione del progetto
+Programma che dato un file.csv di input, ne restituisce una tabella in un file.html, il file viene anche tradotto in un file.pdf.
 
 ## Requisiti
 
-Inserire in questo paragrafo i requisiti richiesti per l'esecuzione del progetto
+import: csv, pdfkit, changer, icecream.
 
 ## Esecuzione
 
-Inserire in questo paragrafo la modalità per la/le esecuzioni del progetto
+Aprire la cartella in un editor, così che il programma possa trovare gli indirizzi dei file inseriti nel programma, aprire stampa_def.py ed avviare.
 
 ## Tags
 
-Inserire in questo paragrafo i tags che descrivono il progetto
+Scuola, scrittura su file, lettura di file, html, python, uso di app esterne, csv, tabelle, pdf.
 
 ## Author
 
-Inserire in questo paragrafo gli autori del progetto
+Mattia Braga 3FI
