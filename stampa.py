@@ -191,7 +191,6 @@ def pdf():
 
 
 
-
 '''
 Aule
 '''
@@ -206,33 +205,45 @@ def tabella_aula(fhtml):
 		attivo = False
 		i = 0 
 		for row in reader:
-			docente = row['docente']
+			aula = row['aula']
+			
 			if attivo == False:
-				docente_attivo = docente
+				aula_attivo = aula
 				attivo = True
 
-			if docente != docente_attivo:
+			if aula != aula_attivo:
 				ic(value_table)
 				doc_aula()
 				fhtml.write("        </tr>")
-				docente_attivo = docente
+				aula_attivo = aula
 				i += 1
-			
+
+			docente = row['docente']
 			giorno = row['giorno']
 			ora = row['ora']
 			classe = row['classe']
-			aula = row['aula']
 			materia = row['materia']
 
-			if value_table[0] != docente:
+			if value_table[0] != aula:
 				value_table = ["" for i in range (41)]
 			li_aula(docente,  giorno, ora, classe, aula, materia)
-			if i == 18:
+			if i == 20:
 				i = 0
 				fhtml.write("<br>")
 				header_aula(fhtml)
 		doc_aula()
 		fhtml.write("        </tr>")
+
+
+def li_aula(docente, giorno, ora, classe, aula, materia):
+    global value_table
+    giorni = {"lunedi": 1, "martedi": 2, "mercoledi" : 3, "giovedi" : 4, "venerdi" : 5}
+    n_giorno = giorni[giorno]
+    value_table[0] = aula
+    offset = ((n_giorno - 1) * 8)
+    indice = offset + int(ora)
+    value_table[indice] = f"{classe}<br>{materia}<br>{docente}"
+    ic(value_table)
 
 
 def doc_aula():
@@ -242,17 +253,6 @@ def doc_aula():
 				fhtml.write(f"            <td colspan='8 align='center' >{value_table[i]}</td>")
 			else:
 				fhtml.write(f"            <td align='center'>{value_table[i]}</td>")
-
-   
-def li_aula(docente, giorno, ora, classe, aula, materia):
-    global value_table
-    giorni = {"lunedi": 1, "martedi": 2, "mercoledi" : 3, "giovedi" : 4, "venerdi" : 5}
-    n_giorno = giorni[giorno]
-    value_table[0] = docente
-    offset = ((n_giorno - 1) * 8)
-    indice = offset + int(ora)
-    value_table[indice] = f"{classe}<br>{aula}<br>{materia}"
-    ic(value_table)
 
 
 def head_aula(fhtml):
@@ -338,7 +338,7 @@ def pdf_aula():
 	'orientation': 'Landscape',
     'margin-top': '0.50in',
     'margin-right': '0.50in',
-    'margin-bottom': '0.60in',
+    'margin-bottom': '0.40in',
     'margin-left': '0.50in',
 }
     #Portrait
