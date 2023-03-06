@@ -13,6 +13,6 @@ def changer():
                         ok = rfile.replace("SOSTEGNO", "SOST")
             rfile = file.readline()
             fil.write(ok)
-            
-            
+
+
 changer()
