@@ -57,7 +57,6 @@ def tabella(fhtml):
 			if docente != docente_attivo:
 				ic(value_table)
 				doc(fhtml)
-				doc(fhtml)
 				fhtml.write("        </tr>")
 				docente_attivo = docente
 				i += 1

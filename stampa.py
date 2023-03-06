@@ -13,13 +13,13 @@ value_table = ["" for i in range (41)]
 def tabella(fhtml):
 	global value_table
 
-	with open('./flussi/odi_stampeA3Docenti.csv', newline='') as csvfile:
+	with open('odi_stampeA3Docenti2.csv', newline='') as csvfile:
 		reader = csv.DictReader(csvfile, delimiter = ";")
 		fhtml.write("        <tr>")
 		attivo = False
 		i = 0 
 		for row in reader:
-			docente = row['docente']
+			docente = row['docenti']
 			if attivo == False:
 				docente_attivo = docente
 				attivo = True
