@@ -11,11 +11,13 @@ import platform
 import os.path
 
 ic.disable()
+# ic.enable()
 
-#tipo = "docenti"
+# tipo = "docenti"
 tipo = "aule"
 
-value_table = ["" for i in range (41)]
+value_table = ["" for i in range(41)]
+
 
 def log(term):
     '''
@@ -29,66 +31,68 @@ def log(term):
     nome_f = os.path.basename(__file__)
     line = "----------------------------------------------"
 
-    if term == False:
-        flog.write(f"{str(time())}, {uname.node}, {uname.system}, {nome_f}, Programma iniziato alle ore {time_string} \n")
+    if term is False:
+        flog.write(f"{str(time())}, {uname.node}, {uname.system},{nome_f}, Programma iniziato alle ore {time_string} \n")
     else:
         flog.write(f"{str(time())}, {uname.node}, {uname.system}, {nome_f}, Programma terminato alle ore {time_string} \n {line} \n")
     flog.close()
-        
+
+
 '''
 Docenti
 '''
 
+
 def tabella(fhtml):
-	global value_table
+    global value_table
 
-	with open('odi_stampeA3Docenti2.csv', newline='') as csvfile:
-		reader = csv.DictReader(csvfile, delimiter = ";")
-		fhtml.write("        <tr>")
-		attivo = False
-		i = 0 
-		for row in reader:
-			docente = row['docenti']
-			if attivo == False:
-				docente_attivo = docente
-				attivo = True
+    with open('odi_stampeA3Docenti2.csv', newline='') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=";")
+        fhtml.write("        <tr>")
+        attivo = False
+        i = 0
+        for row in reader:
+            docente = row['docenti']
+            if attivo is False:
+                docente_attivo = docente
+                attivo = True
 
-			if docente != docente_attivo:
-				ic(value_table)
-				doc()
-				fhtml.write("        </tr>")
-				docente_attivo = docente
-				i += 1
-			
-			giorno = row['giorno']
-			ora = row['ora']
-			classe = row['classe']
-			aula = row['aula']
-			materia = row['materia']
+            if docente != docente_attivo:
+                ic(value_table)
+                doc()
+                fhtml.write("        </tr>")
+                docente_attivo = docente
+                i += 1
 
-			if value_table[0] != docente:
-				value_table = ["" for i in range (41)]
-			li(docente,  giorno, ora, classe, aula, materia)
-			if i == 18:
-				i = 0
-				fhtml.write("<br>")
-				header(fhtml)
-		doc()
-		fhtml.write("        </tr>")
+            giorno = row['giorno']
+            ora = row['ora']
+            classe = row['classe']
+            aula = row['aula']
+            materia = row['materia']
+
+            if value_table[0] != docente:
+                value_table = ["" for i in range(41)]
+                li(docente,  giorno, ora, classe, aula, materia)
+            if i == 18:
+                i = 0
+                fhtml.write("<br>")
+                header(fhtml)
+        doc()
+        fhtml.write("        </tr>")
 
 
 def doc():
-	global value_table
-	for i in range(0, len(value_table)):
-			if i == 0:
-				fhtml.write(f"            <td colspan='8 align='center' >{value_table[i]}</td>")
-			else:
-				fhtml.write(f"            <td align='center'>{value_table[i]}</td>")
+    global value_table
+    for i in range(0, len(value_table)):
+        if i == 0:
+            fhtml.write(f"            <td colspan='8 align='center' >{value_table[i]}</td>")
+        else:
+            fhtml.write(f"            <td align='center'>{value_table[i]}</td>")
 
    
 def li(docente, giorno, ora, classe, aula, materia):
     global value_table
-    giorni = {"lunedi": 1, "martedi": 2, "mercoledi" : 3, "giovedi" : 4, "venerdi" : 5}
+    giorni = {"lunedi": 1, "martedi": 2, "mercoledi": 3, "giovedi": 4, "venerdi": 5}
     n_giorno = giorni[giorno]
     value_table[0] = docente
     offset = ((n_giorno - 1) * 8)
@@ -98,14 +102,15 @@ def li(docente, giorno, ora, classe, aula, materia):
 
 
 def head(fhtml):
-	fhtml.write('''<!DOCTYPE html5>
-	<html>
-		<style>
-			table, tr, td {border:1px solid black;}
-		</style>''')
+    fhtml.write('''<!DOCTYPE html5>
+    <html>
+        <style>
+            table, tr, td {border:1px solid black;}
+        </style>''')
 
-#table-layout:auto;  
+
 def header(fhtml):
+    # table-layout:auto;  
     fhtml.write('''
 		<body>
 			<table border='1'; style="width:100%; height:auto;">   
@@ -176,20 +181,17 @@ def footer(fhtml):
 
 def pdf():
     options = {
-    'page-size': 'A3',
-	'orientation': 'Landscape',
-    'margin-top': '0.50in',
-    'margin-right': '0.50in',
-    'margin-bottom': '0.60in',
-    'margin-left': '0.50in',
-}
-    #Portrait
+		'page-size': 'A3',
+		'orientation': 'Landscape',
+		'margin-top': '0.50in',
+		'margin-right': '0.50in',
+		'margin-bottom': '0.60in',
+		'margin-left': '0.50in',
+	}
+    # Portrait
 
     with open('stampa.html') as f:
-    	pdfkit.from_file(f, 'stampa.pdf', options = options)
-
-
-
+    	pdfkit.from_file(f, 'stampa.pdf', options=options)
 
 '''
 Aule
@@ -200,14 +202,14 @@ def tabella_aula(fhtml):
 	global value_table
 
 	with open('odi_stampeA3Aule2.csv', newline='') as csvfile:
-		reader = csv.DictReader(csvfile, delimiter = ";")
+		reader = csv.DictReader(csvfile, delimiter=";")
 		fhtml.write("        <tr>")
 		attivo = False
 		i = 0 
 		for row in reader:
 			aula = row['aula']
 			
-			if attivo == False:
+			if attivo is False:
 				aula_attivo = aula
 				attivo = True
 
@@ -225,7 +227,7 @@ def tabella_aula(fhtml):
 			materia = row['materia']
 
 			if value_table[0] != aula:
-				value_table = ["" for i in range (41)]
+				value_table = ["" for i in range(41)]
 			li_aula(docente,  giorno, ora, classe, aula, materia)
 			if i == 20:
 				i = 0
@@ -237,7 +239,7 @@ def tabella_aula(fhtml):
 
 def li_aula(docente, giorno, ora, classe, aula, materia):
     global value_table
-    giorni = {"lunedi": 1, "martedi": 2, "mercoledi" : 3, "giovedi" : 4, "venerdi" : 5}
+    giorni = {"lunedi": 1, "martedi": 2, "mercoledi": 3, "giovedi": 4, "venerdi": 5}
     n_giorno = giorni[giorno]
     value_table[0] = aula
     offset = ((n_giorno - 1) * 8)
@@ -262,8 +264,9 @@ def head_aula(fhtml):
 			table, tr, td {border:1px solid black;}
 		</style>''')
 
-#table-layout:auto;  
+  
 def header_aula(fhtml):
+    # table-layout:auto;
     fhtml.write('''
 		<body>
 			<table border='1'; style="width:100%; height:auto;">   
@@ -334,23 +337,23 @@ def footer_aula(fhtml):
 
 def pdf_aula():
     options = {
-    'page-size': 'A3',
-	'orientation': 'Landscape',
-    'margin-top': '0.50in',
-    'margin-right': '0.50in',
-    'margin-bottom': '0.40in',
-    'margin-left': '0.50in',
-}
-    #Portrait
+		'page-size': 'A3',
+		'orientation': 'Landscape',
+		'margin-top': '0.50in',
+		'margin-right': '0.50in',
+		'margin-bottom': '0.40in',
+		'margin-left': '0.50in',
+	}
+    # Portrait
 
     with open('stampa_aula.html') as f:
-    	pdfkit.from_file(f, 'stampa_aula.pdf', options = options)
+    	pdfkit.from_file(f, 'stampa_aula.pdf', options=options)
 
 
 if __name__ == "__main__":
-    log(term = False)
+    log(term=False)
     if tipo == "docenti":
-        fhtml = open("stampa.html","w")
+        fhtml = open("stampa.html", "w")
         aula = False
         changer(aula)
         head(fhtml)
@@ -362,7 +365,7 @@ if __name__ == "__main__":
 
     if tipo == "aule":
         aula = True
-        fhtml = open("stampa_aula.html","w")
+        fhtml = open("stampa_aula.html", "w")
         changer(aula)
         head_aula(fhtml)
         header_aula(fhtml)
@@ -370,4 +373,4 @@ if __name__ == "__main__":
         footer_aula(fhtml)
         ic(value_table)
         pdf_aula()
-    log(term = True)
+    log(term=True)

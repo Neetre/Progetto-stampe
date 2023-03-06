@@ -1,0 +1,8 @@
+sostogno = sost
+palestra = pale
+
+
+
+pep8 =  pip3 install pep8
+        pep8 --first <nome del programma>.py
+        pep8 --show-source --show-pep8 <nomeprogramma>/<nome errore>.py
