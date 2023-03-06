@@ -27,4 +27,4 @@ Scuola, scrittura su file, lettura di file, html, python, uso di app esterne, cs
 
 ## Author
 
-Mattia Braga 3FI - Gianni Bellini
+Mattia Braga 3FI
