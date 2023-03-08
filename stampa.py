@@ -193,6 +193,7 @@ def pdf():
     with open('stampa.html') as f:
     	pdfkit.from_file(f, 'stampa.pdf', options=options)
 
+
 '''
 Aule
 '''
